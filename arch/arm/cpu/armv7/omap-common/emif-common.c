@@ -1307,8 +1307,8 @@ void sdram_init(void)
 		size_prog = log_2_n_round_down(size_prog);
 		size_prog = (1 << size_prog);
 
-		size_detect = get_ram_size((long *)CONFIG_SYS_SDRAM_BASE,
-						size_prog);
+		size_detect = (u32)get_ram_size((unsigned long *)CONFIG_SYS_SDRAM_BASE,
+						(unsigned long)size_prog);
 		/* Compare with the size programmed */
 		if (size_detect != size_prog) {
 			printf("SDRAM: identified size not same as expected"

@@ -37,7 +37,7 @@ int dram_init (void)
 {
 	/* dram_init must store complete ramsize in gd->ram_size */
 	gd->ram_size = get_ram_size(
-			(long *) orion5x_sdram_bar(0),
+			(unsigned long *) orion5x_sdram_bar(0),
 			CONFIG_MAX_RAM_BANK_SIZE);
 	return 0;
 }

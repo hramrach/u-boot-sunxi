@@ -387,7 +387,7 @@ phys_size_t initdram(int board_type)
 {
 	volatile immap_t *immap = (immap_t *) CONFIG_SYS_IMMR;
 	volatile memctl8xx_t *memctl = &immap->im_memctl;
-	long int size;
+	unsigned long size;
 	u32 d1, d2;
 
 	upmconfig(UPMA, (uint *) sdram_table, sizeof(sdram_table) / sizeof(sdram_table[0]));
@@ -448,7 +448,7 @@ phys_size_t initdram(int board_type)
 		DO_LOOP;
 	}
 
-	size = get_ram_size((long *)0, SDRAM_MAX_SIZE);
+	size = get_ram_size((unsigned long *)0, SDRAM_MAX_SIZE);
 
 	return size;
 }

@@ -222,7 +222,7 @@ void lcd_show_board_info(void)
 int dram_init(void)
 {
 	gd->ram_size = get_ram_size(
-		(void *)CONFIG_SYS_SDRAM_BASE,
+		(unsigned long *)CONFIG_SYS_SDRAM_BASE,
 		CONFIG_SYS_SDRAM_SIZE);
 	return 0;
 }

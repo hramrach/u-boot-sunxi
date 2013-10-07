@@ -105,7 +105,7 @@ dataflash_protect_t area_list[NB_DATAFLASH_AREA] = {
 int dram_init(void)
 {
 	gd->ram_size = get_ram_size(
-			(void *)CONFIG_SYS_SDRAM_BASE,
+			(unsigned long *)CONFIG_SYS_SDRAM_BASE,
 			CONFIG_SYS_SDRAM_SIZE);
 	return 0;
 }

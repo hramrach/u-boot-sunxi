@@ -116,7 +116,7 @@ static void init_drive_strength(void)
 
 int dram_init(void)
 {
-	gd->ram_size = get_ram_size((long *)PHYS_SDRAM_1,
+	gd->ram_size = get_ram_size((unsigned long *)PHYS_SDRAM_1,
 		PHYS_SDRAM_1_SIZE);
 
 	return 0;

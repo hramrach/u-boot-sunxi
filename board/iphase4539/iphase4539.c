@@ -220,7 +220,7 @@ phys_size_t initdram (int board_type)
 	 */
 	maxsize = (1 + (~memctl->memc_or1 | 0x7fff)) / 2;
 
-	maxsize = get_ram_size((long *)base, maxsize);
+	maxsize = get_ram_size((unsigned long *)base, maxsize);
 
 	memctl->memc_or1 |= ~(maxsize - 1);
 

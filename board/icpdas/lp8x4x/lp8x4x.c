@@ -40,7 +40,7 @@ int board_init(void)
 int dram_init(void)
 {
 	pxa2xx_dram_init();
-	gd->ram_size = get_ram_size((long *)PHYS_SDRAM_1, PHYS_SDRAM_1_SIZE);
+	gd->ram_size = get_ram_size((unsigned long *)PHYS_SDRAM_1, PHYS_SDRAM_1_SIZE);
 	return 0;
 }
 

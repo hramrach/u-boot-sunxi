@@ -252,11 +252,11 @@ phys_size_t initdram (int board_type)
 static long int dram_size (long int mbmr_value, long int *base,
 			   long int maxsize)
 {
-	long size;
+	unsigned long size;
 
 	/*memctl->memc_mbmr = mbmr_value; */
 
-	size = get_ram_size (base, maxsize);
+	size = get_ram_size ((unsigned long *)base, (unsigned long *)maxsize);
 
 	if (size) {
 /*      printf("(%08lx)", size); */
@@ -264,7 +264,7 @@ static long int dram_size (long int mbmr_value, long int *base,
 		printf ("(0)");
 	}
 
-	return (size);
+	return (long int)(size);
 }
 
 #if defined(CONFIG_CMD_PCMCIA)

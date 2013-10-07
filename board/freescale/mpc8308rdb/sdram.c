@@ -62,7 +62,7 @@ static long fixed_sdram(void)
 	setbits_be32(&im->ddr.sdram_cfg, SDRAM_CFG_MEM_EN);
 	sync();
 
-	return get_ram_size(CONFIG_SYS_DDR_SDRAM_BASE, msize);
+	return (long)get_ram_size(CONFIG_SYS_DDR_SDRAM_BASE, msize);
 }
 
 phys_size_t initdram(int board_type)

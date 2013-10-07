@@ -24,7 +24,7 @@ int dram_init(void)
 
 	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
 		addr = CONFIG_SYS_SDRAM_BASE + (i * SDRAM_BANK_SIZE);
-		gd->ram_size += get_ram_size((long *)addr, SDRAM_BANK_SIZE);
+		gd->ram_size += get_ram_size((unsigned long *)addr, SDRAM_BANK_SIZE);
 	}
 	return 0;
 }
@@ -42,7 +42,7 @@ void dram_init_banksize(void)
 
 	for (i = 0; i < CONFIG_NR_DRAM_BANKS; i++) {
 		addr = CONFIG_SYS_SDRAM_BASE + (i * SDRAM_BANK_SIZE);
-		size = get_ram_size((long *)addr, SDRAM_BANK_SIZE);
+		size = get_ram_size((unsigned long *)addr, SDRAM_BANK_SIZE);
 
 		gd->bd->bi_dram[i].start = addr;
 		gd->bd->bi_dram[i].size = size;

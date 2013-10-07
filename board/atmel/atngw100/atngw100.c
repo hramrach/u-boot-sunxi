@@ -77,7 +77,7 @@ phys_size_t initdram(int board_type)
 	sdram_base = uncached(EBI_SDRAM_BASE);
 
 	expected_size = sdram_init(sdram_base, &sdram_config);
-	actual_size = get_ram_size(sdram_base, expected_size);
+	actual_size = get_ram_size((unsigned long *)sdram_base, expected_size);
 
 	if (expected_size != actual_size)
 		printf("Warning: Only %lu of %lu MiB SDRAM is working\n",

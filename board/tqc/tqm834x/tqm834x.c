@@ -279,7 +279,7 @@ static long int get_ddr_bank_size(short cs, long *base)
 		set_cs_config(cs, CSCONFIG_EN | conf[i].col | conf[i].row);
 
 		debug("Getting RAM size...\n");
-		size = get_ram_size(base, DDR_MAX_SIZE_PER_CS);
+		size = (long)get_ram_size((unsigned long *)base, DDR_MAX_SIZE_PER_CS);
 
 		if((size == conf[i].size) && (i == detected + 1))
 			detected = i;

@@ -43,7 +43,7 @@ int dram_init(void)
 	unsigned long expected_size = PHYS_SDRAM_0_SIZE;
 	unsigned long actual_size;
 
-	actual_size = get_ram_size((void *)sdram_base, expected_size);
+	actual_size = get_ram_size((unsigned long *)sdram_base, expected_size);
 
 	gd->ram_size = actual_size;
 

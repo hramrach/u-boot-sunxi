@@ -226,7 +226,7 @@ uint32_t mxs_mem_get_size(void)
 	da = vt[4];
 	vt[4] = data_abort_memdetect_handler;
 
-	sz = get_ram_size((long *)PHYS_SDRAM_1, PHYS_SDRAM_1_SIZE);
+	sz = (uint32_t)get_ram_size((unsigned long *)PHYS_SDRAM_1, PHYS_SDRAM_1_SIZE);
 
 	/* Restore the old DABT handler. */
 	vt[4] = da;

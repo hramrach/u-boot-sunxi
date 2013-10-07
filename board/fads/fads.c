@@ -255,7 +255,7 @@ static int _draminit (uint base, uint noMbytes, uint edo, uint delay)
 	/* check bytes / 2 because get_ram_size tests at base+bytes, which
 	 * is not mapped */
 	if (noMbytes == 8)
-		if (get_ram_size ((long *) base, noMbytes << 19) != noMbytes << 19) {
+		if (get_ram_size ((unsigned long *) base, noMbytes << 19) != noMbytes << 19) {
 			*((uint *) BCSR1) |= BCSR1_DRAM_EN;	/* disable dram */
 			return -1;
 		}

@@ -85,7 +85,7 @@ static void mx25pdk_fec_init(void)
 int dram_init(void)
 {
 	/* dram_init must store complete ramsize in gd->ram_size */
-	gd->ram_size = get_ram_size((void *)CONFIG_SYS_SDRAM_BASE,
+	gd->ram_size = get_ram_size((unsigned long *)CONFIG_SYS_SDRAM_BASE,
 				PHYS_SDRAM_1_SIZE);
 	return 0;
 }

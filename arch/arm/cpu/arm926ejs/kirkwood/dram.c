@@ -86,7 +86,7 @@ void kw_sdram_size_adjust(enum memory_bank bank)
 	u32 size;
 
 	/* probe currently equipped RAM size */
-	size = get_ram_size((void *)kw_sdram_bar(bank), kw_sdram_bs(bank));
+	size = (u32)get_ram_size((unsigned long *)kw_sdram_bar(bank), (unsigned long)kw_sdram_bs(bank));
 
 	/* adjust SDRAM window size accordingly */
 	kw_sdram_bs_set(bank, size);

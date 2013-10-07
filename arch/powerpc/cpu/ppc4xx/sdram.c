@@ -192,7 +192,7 @@ phys_size_t initdram(int board_type)
 
 		udelay(10000);
 
-		if (get_ram_size(0, mb0cf[i].size) == mb0cf[i].size) {
+		if (get_ram_size((unsigned long *)0, mb0cf[i].size) == mb0cf[i].size) {
 			phys_size_t size = mb0cf[i].size;
 
 			/*
@@ -210,7 +210,7 @@ phys_size_t initdram(int board_type)
 			 * If the size not equal to the size of the first
 			 * bank, then disable the 2nd bank completely.
 			 */
-			if (get_ram_size((long *)mb0cf[i].size, mb0cf[i].size) !=
+			if (get_ram_size((unsigned long *)mb0cf[i].size, (unsigned long)mb0cf[i].size) !=
 			    mb0cf[i].size) {
 				mtsdram(SDRAM0_B1CR, 0);
 				mtsdram(SDRAM0_CFG, 0);
@@ -394,7 +394,7 @@ phys_size_t initdram(int board_type)
 		mtsdram(SDRAM0_CFG0, CONFIG_SYS_SDRAM0_CFG0);
 		udelay(10000);
 
-		if (get_ram_size(0, mb0cf[i].size) == mb0cf[i].size) {
+		if (get_ram_size((unsigned long *)0, mb0cf[i].size) == mb0cf[i].size) {
 			phys_size_t size = mb0cf[i].size;
 			/*
 			 * Optimize TR1 to current hardware environment
@@ -418,7 +418,7 @@ phys_size_t initdram(int board_type)
 			 * If the size not equal to the size of the first
 			 * bank, then disable the 2nd bank completely.
 			 */
-			if (get_ram_size((long *)mb0cf[i].size, mb0cf[i].size)
+			if (get_ram_size((unsigned long *)mb0cf[i].size, mb0cf[i].size)
 			    != mb0cf[i].size) {
 				mtsdram(SDRAM0_CFG0, 0);
 				mtsdram(SDRAM0_B1CR, 0);

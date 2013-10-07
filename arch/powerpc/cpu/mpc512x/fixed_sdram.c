@@ -146,7 +146,7 @@ long int fixed_sdram(ddr512x_config_t *mddrc_config,
 	/* Allow for the DLL to startup before accessing data */
 	udelay(10);
 
-	msize = get_ram_size(CONFIG_SYS_DDR_BASE, CONFIG_SYS_MAX_RAM_SIZE);
+	msize = (u32)get_ram_size(CONFIG_SYS_DDR_BASE, CONFIG_SYS_MAX_RAM_SIZE);
 	/* Fix DDR Local Window for new size */
 	out_be32(&im->sysconf.ddrlaw.ar, __ilog2(msize) - 1);
 	sync_law(&im->sysconf.ddrlaw.ar);

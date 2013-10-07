@@ -59,7 +59,7 @@ phys_size_t initdram(int board_type)
 		{
 			*INCA_IP_SDRAM_MC_CFGPB0 = (0x14 << 8) |
 						   (rows << 4) | cols;
-			size = get_ram_size((long *)CONFIG_SYS_SDRAM_BASE,
+			size = get_ram_size((unsigned long *)CONFIG_SYS_SDRAM_BASE,
 							     max_sdram_size());
 
 			if (size > max_size)

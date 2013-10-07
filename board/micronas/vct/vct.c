@@ -61,7 +61,7 @@ void _machine_restart(void)
  */
 phys_size_t initdram(int board_type)
 {
-	return get_ram_size((long *)CONFIG_SYS_SDRAM_BASE,
+	return get_ram_size((unsigned long *)CONFIG_SYS_SDRAM_BASE,
 			    CONFIG_SYS_MBYTES_SDRAM << 20);
 }
 

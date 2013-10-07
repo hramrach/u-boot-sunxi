@@ -348,10 +348,14 @@ int power_init_board(void)
 
 int dram_init(void)
 {
-	gd->ram_size = get_ram_size((long *)PHYS_SDRAM_1, PHYS_SDRAM_1_SIZE) +
-		get_ram_size((long *)PHYS_SDRAM_2, PHYS_SDRAM_2_SIZE) +
-		get_ram_size((long *)PHYS_SDRAM_3, PHYS_SDRAM_3_SIZE) +
-		get_ram_size((long *)PHYS_SDRAM_4, PHYS_SDRAM_4_SIZE);
+	gd->ram_size 	= get_ram_size((unsigned long *)PHYS_SDRAM_1,
+							PHYS_SDRAM_1_SIZE)
+			+ get_ram_size((unsigned long *)PHYS_SDRAM_2,
+							PHYS_SDRAM_2_SIZE)
+			+ get_ram_size((unsigned long *)PHYS_SDRAM_3,
+							PHYS_SDRAM_3_SIZE)
+			+ get_ram_size((unsigned long *)PHYS_SDRAM_4,
+							PHYS_SDRAM_4_SIZE);
 
 	return 0;
 }

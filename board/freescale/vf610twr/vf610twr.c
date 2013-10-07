@@ -235,7 +235,7 @@ int dram_init(void)
 	setup_iomux_ddr();
 
 	ddr_ctrl_init();
-	gd->ram_size = get_ram_size((void *)PHYS_SDRAM, PHYS_SDRAM_SIZE);
+	gd->ram_size = get_ram_size((unsigned long *)PHYS_SDRAM, PHYS_SDRAM_SIZE);
 
 	return 0;
 }

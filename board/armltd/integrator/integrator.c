@@ -137,12 +137,12 @@ extern void dram_query(void);
 	 *
 	 */
 	sdram_shift = ((cm_reg_sdram & 0x0000001C)/4)%4;
-	gd->ram_size = get_ram_size((long *) CONFIG_SYS_SDRAM_BASE +
+	gd->ram_size = get_ram_size((unsigned long *) CONFIG_SYS_SDRAM_BASE +
 				    REMAPPED_FLASH_SZ,
 				    0x01000000 << sdram_shift);
 	}
 #else
-	gd->ram_size = get_ram_size((long *) CONFIG_SYS_SDRAM_BASE +
+	gd->ram_size = get_ram_size((unsigned long *) CONFIG_SYS_SDRAM_BASE +
 				    REMAPPED_FLASH_SZ,
 				    PHYS_SDRAM_1_SIZE);
 #endif /* CM_SPD_DETECT */

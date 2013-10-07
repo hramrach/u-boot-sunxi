@@ -67,7 +67,7 @@ phys_size_t initdram(int board_type)
 {
 	unsigned long expected_size;
 	unsigned long actual_size;
-	void *sdram_base;
+	unsigned long *sdram_base;
 
 	sdram_base = uncached(EBI_SDRAM_BASE);
 

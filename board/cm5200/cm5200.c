@@ -114,9 +114,9 @@ phys_size_t initdram(int board_type)
 	*(vu_long *)MPC5XXX_SDRAM_CONFIG2 = mem_conf->config2;
 
 	sdram_start(0, mem_conf);
-	test1 = get_ram_size((long *)CONFIG_SYS_SDRAM_BASE, 0x80000000);
+	test1 = get_ram_size((unsigned long *)CONFIG_SYS_SDRAM_BASE, 0x80000000);
 	sdram_start(1, mem_conf);
-	test2 = get_ram_size((long *)CONFIG_SYS_SDRAM_BASE, 0x80000000);
+	test2 = get_ram_size((unsigned long *)CONFIG_SYS_SDRAM_BASE, 0x80000000);
 	if (test1 > test2) {
 		sdram_start(0, mem_conf);
 		dramsize = test1;

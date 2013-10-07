@@ -238,7 +238,8 @@ static long int dram_size (long int mamr_value, long int *base,
 
 	memctl->memc_mamr = mamr_value;
 
-	return (get_ram_size (base, maxsize));
+	return (long int)(get_ram_size ((unsigned long *)base,
+				(unsigned long)maxsize));
 }
 
 #ifdef CONFIG_CMD_DOC

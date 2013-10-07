@@ -303,7 +303,7 @@ int gdc_post_test(int flags)
 		 (old_value >> 8) & 0xFF, old_value & 0xFF,
 		 (old_value >> 16) & 0xFFFF);
 
-	old_value = get_ram_size((void *)GDC_RAM_START,
+	old_value = (uint)get_ram_size((unsigned long *)GDC_RAM_START,
 				 0x02000000);
 
 	debug("GDC RAM size (ist):  %d bytes\n", old_value);

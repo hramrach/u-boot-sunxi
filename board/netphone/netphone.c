@@ -447,7 +447,7 @@ phys_size_t initdram(int board_type)
 		}
 	}
 
-	size = get_ram_size((long *)0, SDRAM_MAX_SIZE);
+	size = (long int)get_ram_size((unsigned long *)0, SDRAM_MAX_SIZE);
 
 	if (size == 0) {
 		printf("SIZE is zero: LOOP on 0\n");

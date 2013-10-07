@@ -295,7 +295,7 @@ int fpga_post_test(int flags)
 	out_be32((void *)FPGA_STAT, in_be32((void *)FPGA_STAT) | 0x1000);
 
 	/* get RAM size */
-	read_value = get_ram_size((void *)CONFIG_SYS_FPGA_BASE_1, FPGA_RAM_SIZE);
+	read_value = (uint)get_ram_size((unsigned long *)CONFIG_SYS_FPGA_BASE_1, FPGA_RAM_SIZE);
 	post_log("FPGA RAM size %d bytes\n", read_value);
 	WATCHDOG_RESET();
 

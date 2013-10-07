@@ -49,7 +49,7 @@ phys_size_t fixed_sdram(void)
 	asm ("sync; isync; msync");
 	udelay(1000);
 
-	if (get_ram_size(0, CONFIG_SYS_SDRAM_SIZE<<20) == CONFIG_SYS_SDRAM_SIZE<<20) {
+	if (get_ram_size((unsigned long *)0, CONFIG_SYS_SDRAM_SIZE<<20) == CONFIG_SYS_SDRAM_SIZE<<20) {
 		/*
 		 * OK, size detected -> all done
 		 */

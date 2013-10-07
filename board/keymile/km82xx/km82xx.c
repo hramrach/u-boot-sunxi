@@ -236,7 +236,7 @@ static long int try_init(memctl8260_t *memctl, ulong sdmr,
 	out_be32(&memctl->memc_psdmr, sdmr | PSDMR_OP_NORM | PSDMR_RFEN);
 	out_8(base, c);
 
-	size = get_ram_size((long *)base, maxsize);
+	size = get_ram_size((unsigned long *)base, maxsize);
 	out_be32(&memctl->memc_or1, orx | ~(size - 1));
 
 	return size;

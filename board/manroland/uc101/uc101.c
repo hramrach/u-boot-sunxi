@@ -155,9 +155,9 @@ phys_size_t initdram (int board_type)
 
 	/* find RAM size using SDRAM CS0 only */
 	sdram_start(0);
-	test1 = get_ram_size((long *)CONFIG_SYS_SDRAM_BASE, 0x20000000);
+	test1 = get_ram_size((unsigned long *)CONFIG_SYS_SDRAM_BASE, 0x20000000);
 	sdram_start(1);
-	test2 = get_ram_size((long *)CONFIG_SYS_SDRAM_BASE, 0x20000000);
+	test2 = get_ram_size((unsigned long *)CONFIG_SYS_SDRAM_BASE, 0x20000000);
 	if (test1 > test2) {
 		sdram_start(0);
 		dramsize = test1;

@@ -81,7 +81,7 @@ phys_size_t initdram (int board_type)
 	memctl->memc_or1   = ~(CONFIG_SYS_SDRAM_MAX_SIZE - 1) | OR_CSNT_SAM;
 	memctl->memc_br1   =  CONFIG_SYS_SDRAM_BASE | BR_PS_32 | BR_MS_UPMA | BR_V;
 
-	msize = get_ram_size(CONFIG_SYS_SDRAM_BASE, CONFIG_SYS_SDRAM_MAX_SIZE);
+	msize = (long int)get_ram_size(CONFIG_SYS_SDRAM_BASE, CONFIG_SYS_SDRAM_MAX_SIZE);
 	memctl->memc_or1  |= ~(msize - 1);
 
 	return msize;

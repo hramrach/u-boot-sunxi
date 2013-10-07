@@ -49,7 +49,7 @@ phys_size_t initdram(int board_type)
 #endif
 
 	/* Now check memory size (after ECC is initialized) */
-	msize = get_ram_size(0, msize);
+	msize = get_ram_size((unsigned long *)0, (unsigned long)msize);
 
 	/* return total bus SDRAM size(bytes)  -- DDR */
 	return msize * 1024 * 1024;

@@ -129,8 +129,8 @@ phys_size_t initdram (int board_type)
 	 * Check Bank 0 Memory Size for re-configuration
 	 *
 	 */
-	size_b0 = get_ram_size ( (long *)SDRAM_BASE2_PRELIM, SDRAM_MAX_SIZE);
-	size_b1 = get_ram_size ( (long *)SDRAM_BASE3_PRELIM, SDRAM_MAX_SIZE);
+	size_b0 = get_ram_size ( (unsigned long *)SDRAM_BASE2_PRELIM, SDRAM_MAX_SIZE);
+	size_b1 = get_ram_size ( (unsigned long *)SDRAM_BASE3_PRELIM, SDRAM_MAX_SIZE);
 
 	printf ("\nbank 0 size %lu\nbank 1 size %lu\n", size_b0, size_b1);
 

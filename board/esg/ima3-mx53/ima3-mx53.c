@@ -45,7 +45,7 @@ static void weim_nor_settings(void)
 
 int dram_init(void)
 {
-	gd->ram_size = get_ram_size((void *) CONFIG_SYS_SDRAM_BASE,
+	gd->ram_size = get_ram_size((unsigned long *) CONFIG_SYS_SDRAM_BASE,
 			PHYS_SDRAM_1_SIZE);
 	return 0;
 }

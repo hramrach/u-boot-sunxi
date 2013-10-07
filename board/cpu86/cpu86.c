@@ -250,7 +250,7 @@ static long int try_init (volatile memctl8260_t * memctl, ulong sdmr,
 	*sdmr_ptr = sdmr | PSDMR_OP_NORM | PSDMR_RFEN;
 	*base = c;
 
-	size = get_ram_size((long *)base, maxsize);
+	size = get_ram_size((unsigned long *)base, maxsize);
 
 	*orx_ptr = orx | ~(size - 1);
 

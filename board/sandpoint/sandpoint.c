@@ -37,10 +37,10 @@ int checkflash (void)
 
 phys_size_t initdram (int board_type)
 {
-	long size;
-	long new_bank0_end;
-	long mear1;
-	long emear1;
+	unsigned long size;
+	unsigned long new_bank0_end;
+	unsigned long mear1;
+	unsigned long emear1;
 
 	size = get_ram_size(CONFIG_SYS_SDRAM_BASE, CONFIG_SYS_MAX_RAM_SIZE);
 
