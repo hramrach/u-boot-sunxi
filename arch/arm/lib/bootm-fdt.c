@@ -17,6 +17,9 @@
 
 #include <common.h>
 #include <fdt_support.h>
+#if defined(CONFIG_ARMV7_NONSEC) || defined(CONFIG_ARMV7_VIRT)
+#include <asm/armv7.h>
+#endif
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -33,4 +36,19 @@ int arch_fixup_memory_node(void *blob)
 	}
 
 	return fdt_fixup_memory_banks(blob, start, size, CONFIG_NR_DRAM_BANKS);
+}
+
+int arch_fixup_fdt(void *blob)
+{
+	int ret;
+
+	ret = arch_fixup_memory_node(blob);
+	if (ret)
+		return ret;
+
+#if defined(CONFIG_ARMV7_NONSEC) || defined(CONFIG_ARMV7_VIRT)
+	ret = armv7_update_dt(blob);
+#endif
+
+	return ret;
 }

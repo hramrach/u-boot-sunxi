@@ -90,8 +90,6 @@ static int fdt_psci(void *fdt)
 
 int armv7_update_dt(void *fdt)
 {
-	fdt_resize(fdt);
-
 #ifndef CONFIG_ARMV7_SECURE_BASE
 	/* secure code lives in RAM, keep it alive */
 	fdt_add_mem_rsv(fdt, (unsigned long)__secure_start,
