@@ -17,6 +17,7 @@ obj-$(CONFIG_A13_OLINUXINO)	+= dram_a13_olinuxino.o
 obj-$(CONFIG_A13_OLINUXINOM)	+= dram_a13_oli_micro.o
 obj-$(CONFIG_A13_MID)		+= dram_sun5i_408_512_busw16_iow8.o
 obj-$(CONFIG_INET86VS)		+= dram_inet86vs.o
+obj-$(CONFIG_A86V4)		+= dram_a86v4.o
 obj-$(CONFIG_A20_OLINUXINO_L)	+= dram_a20_olinuxino_l.o
 obj-$(CONFIG_A20_OLINUXINO_L2)	+= dram_a20_olinuxino_l2.o
 obj-$(CONFIG_A20_OLINUXINO_M)	+= dram_sun7i_384_1024_iow16.o
