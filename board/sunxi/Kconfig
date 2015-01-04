@@ -366,6 +366,9 @@ config VIDEO_LCD_PANEL_HITACHI_TX18D42VM
 	---help---
 	 7.85" 1024x768 Hitachi tx18d42vm LCD panel support
 
+config VIDEO_LCD_PANEL_HITACHI_TX18D42VM
+	bool "Hitachi tx18d42vm LCD panel"
+
 endchoice
 
 

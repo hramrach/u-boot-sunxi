@@ -23,6 +23,10 @@
 #include "hitachi_tx18d42vm_lcd.h"
 #include "ssd2828.h"
 
+#ifdef CONFIG_VIDEO_LCD_PANEL_HITACHI_TX18D42VM
+#define CONFIG_VIDEO_LCD_PANEL_LVDS
+#endif
+
 DECLARE_GLOBAL_DATA_PTR;
 
 enum sunxi_monitor {
