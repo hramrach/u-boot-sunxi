@@ -55,6 +55,9 @@
 #include <dm/root.h>
 #include <linux/compiler.h>
 #include <linux/err.h>
+#ifdef CONFIG_SUN4I_KEYBOARD
+#include <sun4i_keyboard.h>
+#endif
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -662,6 +665,15 @@ static int initr_kbd(void)
 }
 #endif
 
+#ifdef CONFIG_SUN4I_KEYBOARD
+static int initr_sun4i_kbd(void)
+{
+	puts("Sunxi tablet keys: ");
+	sun4i_kbd_init();
+	return 0;
+}
+#endif
+
 static int run_main_loop(void)
 {
 #ifdef CONFIG_SANDBOX
@@ -872,6 +884,9 @@ init_fnc_t init_sequence_r[] = {
 #endif
 #ifdef CONFIG_PS2KBD
 	initr_kbd,
+#endif
+#ifdef CONFIG_SUN4I_KEYBOARD
+        initr_sun4i_kbd,
 #endif
 	run_main_loop,
 };

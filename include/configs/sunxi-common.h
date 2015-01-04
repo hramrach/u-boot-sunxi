@@ -363,11 +363,11 @@
 #ifdef CONFIG_USB_KEYBOARD
 #define CONSOLE_STDIN_SETTINGS \
 	"preboot=usb start\0" \
-	"stdin=serial,usbkbd\0"
+	"stdin=serial,sun4i-kbd,usbkbd\0"
 #define BOOTENV_PREBOOT_INITS_USB
 #else
 #define CONSOLE_STDIN_SETTINGS \
-	"stdin=serial\0"
+	"stdin=serial,sun4i-kbd\0"
 #endif
 
 #ifdef CONFIG_VIDEO

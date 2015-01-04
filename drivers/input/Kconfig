@@ -1,0 +1,9 @@
+
+
+config SUN4I_KEYBOARD
+	bool
+	depends on ARCH_SUNXI
+	prompt "Enable sunxi tablet keys"
+	default y
+	help
+	  Support for the sunxi lradc used for tablet keys.

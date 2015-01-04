@@ -8,3 +8,4 @@ int axp152_set_dcdc3(int mvolt);
 int axp152_set_dcdc4(int mvolt);
 int axp152_set_ldo2(int mvolt);
 int axp152_init(void);
+int axp152_power_button(void);
