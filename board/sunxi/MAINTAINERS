@@ -96,3 +96,10 @@ MARSBOARD-A10 BOARD
 M:	Aleksei Mamlin <mamlinav@gmail.com>
 S:	Maintained
 F:	configs/Marsboard_A10_defconfig
+
+INET-86VS BOARD
+M:	Michal Suchanek <hramrach@gmail.com>
+S:	Maintained
+F:	board/sunxi/dram_inet_86vs.c
+F:	configs/Inet_86VS_defconfig
+
