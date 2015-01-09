@@ -77,6 +77,7 @@ static const unsigned char usb_kbd_num_keypad[] = {
  * when a single keypress expands to 3 queue elements
  */
 static const unsigned char usb_kbd_arrow[] = {
+	/*→,   ←,   ↓,    ↑*/
 	0x6, 0x2, 0xe, 0x10
 };
 
