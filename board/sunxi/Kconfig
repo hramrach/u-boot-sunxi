@@ -31,6 +31,10 @@ config MACH_SUN8I
 	select CPU_V7
 	select SUPPORT_SPL
 
+config MACH_SUN9I
+	bool "sun9i (Allwinner A80)"
+	select CPU_V7
+
 endchoice
 
 config DRAM_CLK
@@ -66,6 +70,7 @@ config SYS_CONFIG_NAME
 	default "sun6i" if MACH_SUN6I
 	default "sun7i" if MACH_SUN7I
 	default "sun8i" if MACH_SUN8I
+	default "sun9i" if MACH_SUN9I
 
 choice
 	prompt "Board"
