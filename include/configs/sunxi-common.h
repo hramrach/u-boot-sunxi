@@ -25,7 +25,68 @@
 
 #include <asm/arch/cpu.h>	/* get chip and board defs */
 
+/*
+ * The DRAM Base differs between sun9i and the others and we cannot use
+ * math in various places like the environment setting and linker scripts,
+ * so "simply" define everything which contains the SDRAM_BASE twice.
+ *
+ * Note we want to have everything identical except for the DRAM base address,
+ * when editing this, please keep everything in sync!
+ */
+
+#ifdef CONFIG_MACH_SUN9I
+
+#define CONFIG_SYS_SDRAM_BASE		0x20000000
+#define CONFIG_SYS_LOAD_ADDR		0x22000000
+#define CONFIG_SYS_TEXT_BASE		0x2a000000
+#define CONFIG_SYS_SPL_MALLOC_START	0x2ff00000
+#define CONFIG_SYS_SPL_MALLOC_SIZE	0x00080000	/* 512 KiB */
+#define CONFIG_SPL_BSS_START_ADDR	0x2ff80000
+#define CONFIG_SPL_BSS_MAX_SIZE		0x00080000	/* 512 KiB */
+
+/* Use the room between the end of bootm_size and the framebuffer */
+#define CONFIG_PRE_CON_BUF_ADDR		0x2f000000
+
+/*
+ * 240M RAM (256M minimum minus space for the framebuffer),
+ * 32M uncompressed kernel, 16M compressed kernel, 1M fdt,
+ * 1M script, 1M pxe and the ramdisk at the end.
+ */
+#define MEM_LAYOUT_ENV_SETTINGS \
+	"bootm_size=0xf000000\0" \
+	"kernel_addr_r=0x22000000\0" \
+	"fdt_addr_r=0x23000000\0" \
+	"scriptaddr=0x23100000\0" \
+	"pxefile_addr_r=0x23200000\0" \
+	"ramdisk_addr_r=0x23300000\0"
+
+#else /* ifdef CONFIG_MACH_SUN9I */
+
+#define CONFIG_SYS_SDRAM_BASE		0x40000000
+#define CONFIG_SYS_LOAD_ADDR		0x42000000
 #define CONFIG_SYS_TEXT_BASE		0x4a000000
+#define CONFIG_SYS_SPL_MALLOC_START	0x4ff00000
+#define CONFIG_SYS_SPL_MALLOC_SIZE	0x00080000	/* 512 KiB */
+#define CONFIG_SPL_BSS_START_ADDR	0x4ff80000
+#define CONFIG_SPL_BSS_MAX_SIZE		0x00080000	/* 512 KiB */
+
+/* Use the room between the end of bootm_size and the framebuffer */
+#define CONFIG_PRE_CON_BUF_ADDR		0x4f000000
+
+/*
+ * 240M RAM (256M minimum minus space for the framebuffer),
+ * 32M uncompressed kernel, 16M compressed kernel, 1M fdt,
+ * 1M script, 1M pxe and the ramdisk at the end.
+ */
+#define MEM_LAYOUT_ENV_SETTINGS \
+	"bootm_size=0xf000000\0" \
+	"kernel_addr_r=0x42000000\0" \
+	"fdt_addr_r=0x43000000\0" \
+	"scriptaddr=0x43100000\0" \
+	"pxefile_addr_r=0x43200000\0" \
+	"ramdisk_addr_r=0x43300000\0"
+
+#endif
 
 #if !defined(CONFIG_SPL_BUILD) && defined(CONFIG_DM)
 # define CONFIG_CMD_DM
@@ -54,8 +115,6 @@
 # define CONFIG_SYS_NS16550_COM5		SUNXI_R_UART_BASE
 #endif
 
-/* DRAM Base */
-#define CONFIG_SYS_SDRAM_BASE		0x40000000
 #define CONFIG_SYS_INIT_RAM_ADDR	0x0
 #define CONFIG_SYS_INIT_RAM_SIZE	0x8000	/* 32 KiB */
 
@@ -113,10 +172,8 @@
 /* Boot Argument Buffer Size */
 #define CONFIG_SYS_BARGSIZE		CONFIG_SYS_CBSIZE
 
-#define CONFIG_SYS_LOAD_ADDR		0x42000000 /* default load address */
-
 /* standalone support */
-#define CONFIG_STANDALONE_LOAD_ADDR	0x42000000
+#define CONFIG_STANDALONE_LOAD_ADDR	CONFIG_SYS_LOAD_ADDR
 
 /* baudrate */
 #define CONFIG_BAUDRATE			115200
@@ -153,9 +210,6 @@
 
 #else /* CONFIG_SPL */
 
-#define CONFIG_SPL_BSS_START_ADDR	0x4ff80000
-#define CONFIG_SPL_BSS_MAX_SIZE		0x80000		/* 512 KiB */
-
 #define CONFIG_SPL_TEXT_BASE		0x20		/* sram start+header */
 #define CONFIG_SPL_MAX_SIZE		0x5fe0		/* 24KB on sun4i/sun7i */
 
@@ -175,8 +229,6 @@
 /* end of 32 KiB in sram */
 #define LOW_LEVEL_SRAM_STACK		0x00008000 /* End of sram */
 #define CONFIG_SPL_STACK		LOW_LEVEL_SRAM_STACK
-#define CONFIG_SYS_SPL_MALLOC_START	0x4ff00000
-#define CONFIG_SYS_SPL_MALLOC_SIZE	0x00080000	/* 512 KiB */
 
 /* I2C */
 #define CONFIG_SPL_I2C_SUPPORT
@@ -283,22 +335,6 @@
 /* Enable pre-console buffer to get complete log on the VGA console */
 #define CONFIG_PRE_CONSOLE_BUFFER
 #define CONFIG_PRE_CON_BUF_SZ		(1024 * 1024)
-/* Use the room between the end of bootm_size and the framebuffer */
-#define CONFIG_PRE_CON_BUF_ADDR		0x4f000000
-
-/*
- * 240M RAM (256M minimum minus space for the framebuffer),
- * 32M uncompressed kernel, 16M compressed kernel, 1M fdt,
- * 1M script, 1M pxe and the ramdisk at the end.
- */
-#define MEM_LAYOUT_ENV_SETTINGS \
-	"bootm_size=0xf000000\0" \
-	"kernel_addr_r=0x42000000\0" \
-	"fdt_addr_r=0x43000000\0" \
-	"scriptaddr=0x43100000\0" \
-	"pxefile_addr_r=0x43200000\0" \
-	"ramdisk_addr_r=0x43300000\0"
-
 #ifdef CONFIG_MMC
 #define BOOT_TARGET_DEVICES_MMC(func) func(MMC, mmc, 0)
 #else
