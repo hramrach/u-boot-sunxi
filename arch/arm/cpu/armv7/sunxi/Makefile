@@ -7,6 +7,7 @@
 #
 # SPDX-License-Identifier:	GPL-2.0+
 #
+obj-y	+= lowlevel_init.o
 obj-y	+= timer.o
 obj-y	+= board.o
 obj-y	+= clock.o

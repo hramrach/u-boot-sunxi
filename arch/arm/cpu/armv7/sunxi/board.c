@@ -72,14 +72,6 @@ void s_init(void)
 	 * access gets messed up (seems cache related) */
 	setbits_le32(SUNXI_SRAMC_BASE + 0x44, 0x1800);
 #endif
-#if !defined CONFIG_SPL_BUILD && (defined CONFIG_MACH_SUN7I || \
-		defined CONFIG_MACH_SUN6I || defined CONFIG_MACH_SUN8I)
-	/* Enable SMP mode for CPU0, by setting bit 6 of Auxiliary Ctl reg */
-	asm volatile(
-		"mrc p15, 0, r0, c1, c0, 1\n"
-		"orr r0, r0, #1 << 6\n"
-		"mcr p15, 0, r0, c1, c0, 1\n");
-#endif
 
 	clock_init();
 	timer_init();
