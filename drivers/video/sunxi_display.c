@@ -20,6 +20,7 @@
 #include <fdt_support.h>
 #include <video_fb.h>
 #include "videomodes.h"
+#include "hitachi_tx18d42vm_lcd.h"
 #include "ssd2828.h"
 
 DECLARE_GLOBAL_DATA_PTR;
@@ -976,6 +977,14 @@ static int sunxi_ssd2828_init(const struct ctfb_res_modes *mode)
 }
 #endif /* CONFIG_VIDEO_LCD_SSD2828 */
 
+#ifdef CONFIG_VIDEO_LCD_HITACHI_TX18D42VM
+static void sunxi_hitachi_tx18d42vm_init(void)
+{
+	mdelay(50); /* Wait for lcd controller power on */
+	hitachi_tx18d42vm_init();
+}
+#endif
+
 static void sunxi_engines_init(void)
 {
 	sunxi_composer_init();
@@ -1004,6 +1013,9 @@ static void sunxi_mode_set(const struct ctfb_res_modes *mode,
 		break;
 	case sunxi_monitor_lcd:
 		sunxi_lcdc_panel_enable();
+#ifdef CONFIG_VIDEO_LCD_HITACHI_TX18D42VM
+		sunxi_hitachi_tx18d42vm_init();
+#endif
 		sunxi_composer_mode_set(mode, address);
 		sunxi_lcdc_tcon0_mode_set(mode);
 		sunxi_composer_enable();
