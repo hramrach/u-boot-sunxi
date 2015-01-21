@@ -182,6 +182,23 @@ ENTRY(cpu_init_cp15)
 	mov	pc, lr			@ back to my caller
 ENDPROC(cpu_init_cp15)
 
+/*************************************************************************
+ *
+ * cpu_init_cortex_a7
+ *
+ * Set the ACTLR.SMP bit. "Cortex-A7 MPCore Technical Reference Manual":
+ * "You must ensure this bit is set to 1 before the caches and MMU are
+ * enabled, or any cache and TLB maintenance operations are performed."
+ * So for cortex A7 this must be called before calling cpu_init_cp15.
+ *
+ *************************************************************************/
+ENTRY(cpu_init_cortex_a7)
+	mrc	p15, 0, r0, c1, c0, 1
+	orr	r0, r0, #(1<<6)
+	mcr	p15, 0, r0, c1, c0, 1
+	mov	pc, lr			@ back to my caller
+ENDPROC(cpu_init_cortex_a7)
+
 #ifndef CONFIG_SKIP_LOWLEVEL_INIT
 /*************************************************************************
  *
