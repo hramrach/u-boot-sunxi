@@ -64,7 +64,7 @@ reset:
 
 	/* the mask ROM code should have PLL and others stable */
 #ifndef CONFIG_SKIP_LOWLEVEL_INIT
-	bl	cpu_init_cp15
+	bl	soc_init
 	bl	cpu_init_crit
 #endif
 
@@ -99,6 +99,22 @@ ENTRY(save_boot_params)
 	bx	lr			@ back to my caller
 ENDPROC(save_boot_params)
 	.weak	save_boot_params
+
+/*************************************************************************
+ *
+ * void soc_init(void)
+ *	__attribute__((weak));
+ *
+ * Stack pointer is not yet initialized at this moment
+ * Don't save anything to stack even if compiled with -O0
+ *
+ *************************************************************************/
+ENTRY(soc_init)
+	mov	r9, lr
+	bl	cpu_init_cp15
+	mov	pc, r9			@ back to my caller
+ENDPROC(soc_init)
+	.weak	soc_init
 
 /*************************************************************************
  *
