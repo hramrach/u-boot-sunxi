@@ -10,6 +10,34 @@
 #ifndef _CONFIG_CMD_DISTRO_BOOTCMD_H
 #define _CONFIG_CMD_DISTRO_BOOTCMD_H
 
+#ifdef CONFIG_SPL_FEL /* boot kernel preloaded to RAM over USB */
+#define BOOTENV_SHARED_RAM \
+	"mem_ramdisk=-\0" \
+	"boot_ram=" \
+	"if iminfo ${scriptaddr} ; then " \
+	"echo Running script from ${scriptaddr} ... ; " \
+		"source ${scriptaddr} ; " \
+	"else ; " \
+		"echo No script found on ${scriptaddr} ... ; " \
+	"fi ; " \
+	"if iminfo ${kernel_addr_r} ; then " \
+	"echo Booting kernel from ${kernel_addr_r} ... ; " \
+		"echo Device tree at ${fdt_addr_r} ... ; " \
+		"if iminfo ${ramdisk_addr_r} ; then " \
+			"echo Ramdisk at ${ramdisk_addr_r} ... ; " \
+			"setenv mem_ramdisk ${ramdisk_addr_r} ; " \
+		"fi ; " \
+		"echo bootargs ${bootargs} ... ; " \
+		"bootm ${kernel_addr_r} ${mem_ramdisk} ${fdt_addr_r} ; " \
+	"else ; " \
+		"echo No kernel found on ${kernel_addr_r} ... ; " \
+	"fi \0"
+#define BOOT_RAM " run boot_ram ; "
+#else /* SPL_FEL */
+#define BOOT_RAM " "
+#define BOOTENV_SHARED_RAM " "
+#endif
+
 #define BOOTENV_SHARED_BLKDEV_BODY(devtypel) \
 		"if " #devtypel " dev ${devnum}; then " \
 			"setenv devtype " #devtypel "; " \
@@ -147,6 +175,7 @@
 #define BOOTENV_DEV(devtypeu, devtypel, instance) \
 	BOOTENV_DEV_##devtypeu(devtypeu, devtypel, instance)
 #define BOOTENV \
+	BOOTENV_SHARED_RAM \
 	BOOTENV_SHARED_MMC \
 	BOOTENV_SHARED_USB \
 	BOOTENV_SHARED_SATA \
@@ -194,7 +223,7 @@
 	\
 	BOOT_TARGET_DEVICES(BOOTENV_DEV)                                  \
 	\
-	"bootcmd=" BOOTENV_SET_SCSI_NEED_INIT                             \
+	"bootcmd=" BOOT_RAM BOOTENV_SET_SCSI_NEED_INIT                    \
 		"for target in ${boot_targets}; do "                      \
 			"run bootcmd_${target}; "                         \
 		"done\0"
